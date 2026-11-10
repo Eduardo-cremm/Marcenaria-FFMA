@@ -44,7 +44,7 @@ export default async function Produtos({ searchParams }: { searchParams: { ok?: 
             })}
           </tbody>
         </table>
-        {!rows.length && <p className="px-5 py-8 text-center text-sm text-muted">Nenhum produto cadastrado. Enquanto a loja estiver vazia no banco, ela aparece vazia no site.</p>}
+        {!rows.length && <p className="px-5 py-8 text-center text-sm text-muted">Nenhum produto cadastrado. Até você cadastrar o primeiro, o site mostra os produtos de exemplo.</p>}
       </div>
     </>
   );

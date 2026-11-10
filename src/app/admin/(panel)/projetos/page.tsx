@@ -38,7 +38,7 @@ export default async function Projetos({ searchParams }: { searchParams: { ok?: 
           })}
         </ul>
       ) : (
-        <p className="rounded-xl bg-white px-5 py-8 text-center text-sm text-muted shadow-sm">Nenhum projeto cadastrado ainda.</p>
+        <p className="rounded-xl bg-white px-5 py-8 text-center text-sm text-muted shadow-sm">Nenhum projeto cadastrado. Até você publicar o primeiro, o site mostra os projetos de exemplo.</p>
       )}
     </>
   );

@@ -124,6 +124,8 @@ export async function getProducts(): Promise<Product[]> {
     .order("display_order")
     .order("created_at", { ascending: false });
   if (error) throw new Error("Falha ao ler produtos: " + error.message);
+  // Enquanto nada foi cadastrado no admin, mostra o conteúdo de exemplo.
+  if (!data.length) return products;
   return (data as ProductRow[]).map(toProduct);
 }
 export async function getProduct(slug: string): Promise<Product | undefined> {
@@ -139,6 +141,7 @@ export async function getProjects(): Promise<Project[]> {
     .order("display_order")
     .order("completed_at", { ascending: false, nullsFirst: false });
   if (error) throw new Error("Falha ao ler projetos: " + error.message);
+  if (!data.length) return projects;
   return (data as ProjectRow[]).map(toProject);
 }
 export async function getProject(slug: string): Promise<Project | undefined> {
