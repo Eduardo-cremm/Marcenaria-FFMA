@@ -63,21 +63,40 @@ export function HomeMotion() {
           gsap.set(peek, { xPercent: -50, yPercent: -55, scale: 0.8 });
           const px = gsap.quickTo(peek, "x", { duration: 0.5, ease: "power3" });
           const py = gsap.quickTo(peek, "y", { duration: 0.5, ease: "power3" });
-          const move = (e: MouseEvent) => { px(e.clientX + 170); py(e.clientY); };
-          const enter = (e: Event) => {
-            const a = (e.target as HTMLElement).closest<HTMLElement>("a[data-ph]");
-            if (!a) return;
-            peek.className = "peek ph " + a.dataset.ph;
-            gsap.to(peek, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "power3.out" });
+          // A foto aparece só enquanto o cursor está em cima de uma linha. O estado é
+          // recalculado a cada movimento e a cada rolagem, para ela nunca ficar presa na tela.
+          let current: HTMLElement | null = null, mx = -1, my = -1;
+          const show = (a: HTMLElement | null) => {
+            if (a === current) return;
+            current = a;
+            if (a) {
+              peek.className = "peek ph " + a.dataset.ph;
+              gsap.to(peek, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "power3.out", overwrite: "auto" });
+            } else {
+              gsap.to(peek, { autoAlpha: 0, scale: 0.8, duration: 0.3, overwrite: "auto" });
+            }
           };
-          const leave = () => gsap.to(peek, { autoAlpha: 0, scale: 0.8, duration: 0.3 });
-          svc.addEventListener("mousemove", move);
-          svc.addEventListener("mouseover", enter);
-          svc.addEventListener("mouseleave", leave);
+          const rowAt = (el: Element | null) => {
+            const a = el?.closest<HTMLElement>("a[data-ph]") ?? null;
+            return a && svc.contains(a) ? a : null;
+          };
+          const move = (e: MouseEvent) => {
+            mx = e.clientX; my = e.clientY;
+            const a = rowAt(e.target as Element);
+            if (a) { px(mx + 170); py(my); }
+            show(a);
+          };
+          const scroll = () => { if (current) show(mx < 0 ? null : rowAt(document.elementFromPoint(mx, my))); };
+          const hide = () => show(null);
+          window.addEventListener("mousemove", move, { passive: true });
+          window.addEventListener("scroll", scroll, { passive: true });
+          window.addEventListener("blur", hide);
+          document.documentElement.addEventListener("mouseleave", hide);
           cleanups.push(() => {
-            svc.removeEventListener("mousemove", move);
-            svc.removeEventListener("mouseover", enter);
-            svc.removeEventListener("mouseleave", leave);
+            window.removeEventListener("mousemove", move);
+            window.removeEventListener("scroll", scroll);
+            window.removeEventListener("blur", hide);
+            document.documentElement.removeEventListener("mouseleave", hide);
           });
         }
 
