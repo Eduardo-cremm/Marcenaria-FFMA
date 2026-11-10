@@ -28,17 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 
-# Claude Code local config
-.claude/
-
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-CLAUDE.md
-
-# Arquivos de referência e design (uso interno)
-Arquivos para Ler/

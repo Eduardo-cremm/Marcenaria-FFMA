@@ -1,37 +1,24 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/components/**/*.{ts,tsx}", "./src/app/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "#F1EFE8",
-        nav: "#2C2C2A",
-        gold: "#FAC775",
-        "brown-dk": "#412402",
-        "brown-md": "#854F0B",
-        cta: "#BA7517",
-        "gray-1": "#5F5E5A",
-        "gray-2": "#888780",
-        "gray-3": "#B4B2A9",
-        "blade-red": "#D91A1A",
+        forest: { DEFAULT: "#1C3329", deep: "#12211A" },
+        cream: "#F3EFE4",
+        surface: "#FBF8F0",
+        ink: "#18261F",
+        muted: "#5C675F",
+        line: "#D9D3C2",
+        brass: { DEFAULT: "#B8913F", lt: "#D4B166", dk: "#86641C" },
+        sage: "#A9B8AE",
+        pine: "#2F4A3D",
         whats: "#25D366",
-        cream: "#FAEEDA",
       },
       fontFamily: {
-        serif: ["Georgia", "Times New Roman", "serif"],
-        sans: ["-apple-system", "BlinkMacSystemFont", "Inter", "sans-serif"],
-      },
-      borderRadius: {
-        DEFAULT: "10px",
-      },
-      boxShadow: {
-        card: "0 2px 12px rgba(0,0,0,0.06)",
-        "card-hover": "0 8px 24px rgba(0,0,0,0.10)",
+        serif: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
     },
   },

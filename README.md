@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marcenaria FFMA
 
-## Getting Started
+Site da Marcenaria FFMA: apresentação do serviço sob medida, portfólio de projetos, loja com pedido pelo WhatsApp e painel administrativo.
 
-First, run the development server:
+Next.js 14 (App Router) · Tailwind CSS · GSAP + Lenis · Supabase (banco, login e fotos) · Vercel.
+
+## Rodar localmente
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sem as variáveis do Supabase o site funciona com o conteúdo de exemplo de `src/lib/data.ts` e o `/admin` fica desligado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Ligar o Supabase (uma vez)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Crie um projeto em supabase.com.
+2. Em **SQL Editor**, cole e rode o conteúdo de `supabase/schema.sql`.
+3. Em **Authentication > Users**, crie o usuário que vai administrar o site (e-mail e senha).
+4. No **SQL Editor**, libere esse usuário como admin:
+   ```sql
+   insert into admins (user_id) select id from auth.users where email = 'SEU_EMAIL';
+   ```
+5. Em **Authentication > Sign In / Providers**, desligue "Allow new users to sign up".
+6. Copie a **Project URL** e a chave **anon public** (Project Settings > API) para `.env.local` e para as variáveis de ambiente da Vercel, e publique de novo.
 
-## Learn More
+## Painel admin (`/admin`)
 
-To learn more about Next.js, take a look at the following resources:
+- **Resumo:** contadores e últimos orçamentos.
+- **Produtos e Projetos:** cadastro, fotos (reduzidas no navegador antes do envio, a primeira é a capa), publicar/ocultar e destaque na home.
+- **Orçamentos:** mensagens do formulário de contato, com resposta pelo WhatsApp e marcação de respondido.
+- **Configurações:** WhatsApp que recebe os pedidos, telefone, e-mail, endereço e o texto da página Sobre.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O acesso é protegido em três camadas: middleware (sessão), layout do painel (lista `admins`) e políticas RLS no banco.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estrutura
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/app/(site)   páginas públicas
+src/app/admin    painel e ações do servidor
+src/components   componentes e animações
+src/lib          dados, formatação e clientes do Supabase
+supabase         schema do banco
+mockups          protótipos de referência
+```
