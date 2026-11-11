@@ -43,7 +43,7 @@ export default async function Loja({ searchParams }: { searchParams: { categoria
               <Link key={c} href={url(c, ordem)} scroll={false} className="chip" aria-current={cat === c ? "true" : undefined}>{c}</Link>
             ))}
           </div>
-          <div className="flex items-center gap-3 text-sm">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 whitespace-nowrap text-sm">
             <span className="text-muted">{list.length} {list.length === 1 ? "produto" : "produtos"} ·</span>
             {sorts.map((s) => (
               <Link key={s.key} href={url(cat, s.key)} scroll={false} className={ordem === s.key ? "font-semibold underline" : "text-muted hover:text-ink"}>
@@ -53,7 +53,7 @@ export default async function Loja({ searchParams }: { searchParams: { categoria
           </div>
         </div>
         {list.length ? (
-          <div className="shop !grid-cols-2 lg:!grid-cols-4">
+          <div className="shop !grid-cols-2 sm:!grid-cols-3 lg:!grid-cols-4">
             {list.map((p) => <ProductCard key={p.id} p={p} />)}
           </div>
         ) : (

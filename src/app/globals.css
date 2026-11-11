@@ -8,9 +8,10 @@
   --g-muted: #a9b8ae; --g-line: #2f4a3d;
   --gut: max(32px, calc((100vw - 1240px) / 2));
 }
+html, body { overflow-x: clip; max-width: 100%; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
-body { font-family: var(--font-inter), system-ui, sans-serif; background: var(--green-2); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { font-family: var(--font-inter), system-ui, sans-serif; background: var(--green-2); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
 main { background: var(--cream); }
 
 .serif { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; letter-spacing: -0.015em; }
@@ -57,9 +58,11 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 .hd.solid { background: rgba(18, 33, 26, 0.86); backdrop-filter: blur(14px); }
 .hd.up { transform: translateY(-100%); }
 .nav { height: 76px; padding: 0 var(--gut); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: flex; align-items: center; gap: 12px; }
+/* a base reta da serra fica na mesma linha de base do nome */
+.brand { display: flex; align-items: baseline; gap: 12px; white-space: nowrap; }
+.brand svg { flex: none; }
 .brand svg path { fill: var(--cream); }
-.brand b { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; font-size: 19px; }
+.brand b { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; font-size: 19px; line-height: 1; }
 .links { display: flex; gap: 30px; font-size: 14.5px; font-weight: 500; }
 .links a { opacity: 0.75; transition: opacity 0.15s; }
 .links a:hover, .links a[aria-current="page"] { opacity: 1; }
@@ -163,9 +166,9 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 .card .ph { aspect-ratio: 1; border-radius: 8px; display: block; }
 .card h3 { font-size: 15.5px; font-weight: 600; margin-top: 14px; }
 .card small { color: var(--muted); font-size: 13px; }
-.card .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
+.card .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
 .card .price { font-family: var(--font-fraunces), Georgia, serif; font-size: 22px; font-weight: 500; }
-.add { border: 1.5px solid var(--line); color: var(--ink); border-radius: 999px; padding: 8px 16px; font-size: 13.5px; font-weight: 600; transition: background 0.2s, border-color 0.2s; }
+.add { white-space: nowrap; border: 1.5px solid var(--line); color: var(--ink); border-radius: 999px; padding: 8px 16px; font-size: 13.5px; font-weight: 600; transition: background 0.2s, border-color 0.2s; }
 .add:hover { background: var(--brass); border-color: var(--brass); }
 .tag { position: absolute; z-index: 1; top: 12px; left: 12px; background: var(--brass); color: var(--ink); font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; }
 
@@ -208,14 +211,42 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
   .svc a { grid-template-columns: 36px 1fr 28px; }
   .svc p { display: none; }
   .proc-in, .about { grid-template-columns: 1fr; gap: 40px; }
+  .proc-in > *, .about > *, .hero > * { min-width: 0; }
+  .big { font-size: clamp(88px, 22vw, 170px); }
+  .steps p { max-width: none; }
+  .hero { min-height: 0; padding-bottom: 64px; }
+  .hero-copy p { max-width: 560px; }
+  .track figure { flex-basis: min(82vw, 560px); }
   .shop { grid-template-columns: 1fr 1fr; }
   .gal { padding: 76px 0; }
 }
+@media (min-width: 640px) and (max-width: 899px) {
+  :root { --gut: 40px; }
+  .hero-media { aspect-ratio: 16/10; }
+}
 @media (max-width: 560px) {
   :root { --gut: 16px; }
-  .hero-stats { gap: 22px; }
+  .hero-stats { gap: 18px; justify-content: space-between; }
+  .hero-stats strong { font-size: 27px; }
+  .hero-cta .btn { flex: 1 1 auto; }
+  .nav { height: 68px; gap: 12px; }
+  .mnav { inset: 68px 0 auto 0; }
+  .brand { gap: 9px; }
+  .brand b { font-size: 17px; }
+  .steps { padding-left: 30px; }
+  .steps li { grid-template-columns: 32px 1fr; }
+  .card .row .add { flex: 1 1 100%; text-align: center; }
+  .card .price { font-size: 20px; }
+  .nums div { padding: 22px 16px; }
+  .nums strong { font-size: 36px; }
   .cta-sec { padding: 80px 0; }
   .shop { gap: 16px; }
+}
+@media (max-width: 380px) {
+  .brand svg { width: 36px; height: auto; }
+  .brand b { font-size: 15.5px; }
+  .nav-right { gap: 8px; }
+  .hero-stats span { font-size: 12px; }
 }
 
 @tailwind utilities;
