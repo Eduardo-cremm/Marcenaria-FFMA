@@ -79,6 +79,8 @@ export default async function Home() {
       </section>
       <div className="peek ph ph-a" aria-hidden="true" />
 
+      {/* O div em volta é do React; o GSAP mexe só dentro dele ao prender a seção no scroll. */}
+      <div>
       <section className="gal dark">
         <div className="head">
           <div>
@@ -112,7 +114,9 @@ export default async function Home() {
           <span>Role para avançar</span>
         </div>
       </section>
+      </div>
 
+      <div>
       <section className="sec light proc-pin">
         <div className="proc-in">
           <div>
@@ -127,6 +131,7 @@ export default async function Home() {
           <Steps />
         </div>
       </section>
+      </div>
 
       <section className="sec" style={{ background: "var(--surface)" }}>
         <div className="head">

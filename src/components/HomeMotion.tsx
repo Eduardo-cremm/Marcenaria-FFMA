@@ -2,11 +2,12 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 /** Animações exclusivas da home: abertura, hero em tela cheia, galeria horizontal e passos presos ao scroll. */
 export function HomeMotion() {
-  useEffect(() => {
+  // useLayoutEffect: a limpeza precisa desfazer as seções presas antes de o React remover a página.
+  useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const root = document.documentElement;
     const $ = <T extends HTMLElement>(s: string) => document.querySelector<T>(s)!;
