@@ -33,7 +33,8 @@ export async function Footer() {
       </div>
       <div className="mt-12 flex flex-col gap-3 border-t border-pine pt-6 text-[13px] md:flex-row md:items-start md:justify-between">
         <p>
-          © {new Date().getFullYear()} {c.legalName || "Marcenaria FFMA"}
+          © {new Date().getFullYear()} Marcenaria FFMA
+          {c.legalName && c.legalName !== "Marcenaria FFMA" && <> · {c.legalName}</>}
           {c.cnpj && <> · CNPJ {c.cnpj}</>}
           <br />
           {c.address}
