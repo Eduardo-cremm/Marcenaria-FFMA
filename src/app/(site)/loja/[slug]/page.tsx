@@ -48,8 +48,14 @@ export default async function Produto({ params }: Props) {
             <dl className="mt-10 divide-y divide-line border-y border-line text-[15px]">
               <div className="flex justify-between py-3"><dt className="text-muted">Disponibilidade</dt><dd className="font-semibold">{p.inStock ? "Pronta entrega" : "Sob encomenda"}</dd></div>
               <div className="flex justify-between py-3"><dt className="text-muted">Prazo de produção</dt><dd className="font-semibold">{p.leadTime}</dd></div>
-              <div className="flex justify-between py-3"><dt className="text-muted">Pagamento</dt><dd className="font-semibold">{paymentMethods.join(", ")}</dd></div>
+              <div className="flex justify-between gap-6 py-3"><dt className="text-muted">Pagamento</dt><dd className="text-right font-semibold">{paymentMethods.join(", ")}</dd></div>
+              <div className="flex justify-between gap-6 py-3"><dt className="text-muted">Frete e instalação</dt><dd className="text-right font-semibold">Calculados pelo endereço, antes do pagamento</dd></div>
+              <div className="flex justify-between gap-6 py-3"><dt className="text-muted">Garantia</dt><dd className="text-right font-semibold">1 ano contra defeitos de fabricação</dd></div>
             </dl>
+            <p className="mt-4 text-sm text-muted">
+              Você pode desistir em até 7 dias após o recebimento, com devolução integral.{" "}
+              <Link href="/termos#arrependimento" className="underline">Trocas e devoluções</Link>
+            </p>
           </div>
         </div>
 

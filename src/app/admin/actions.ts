@@ -204,6 +204,8 @@ export async function saveCompany(f: FormData) {
   if (whatsapp && (whatsapp.length < 12 || whatsapp.length > 13)) {
     fail("/admin/configuracoes", "WhatsApp deve ter DDI + DDD + número, só dígitos (ex.: 5511912345678).");
   }
+  const cnpj = str(f, "cnpj").replace(/\D/g, "");
+  if (cnpj && cnpj.length !== 14) fail("/admin/configuracoes", "CNPJ deve ter 14 dígitos.");
   const { error } = await db.from("company_info").upsert({
     id: 1,
     whatsapp_number: whatsapp || null,
@@ -211,9 +213,14 @@ export async function saveCompany(f: FormData) {
     contact_email: opt(f, "contact_email"),
     address: opt(f, "address"),
     history_text: opt(f, "history_text"),
+    legal_name: opt(f, "legal_name"),
+    cnpj: cnpj || null,
     updated_at: new Date().toISOString(),
   });
-  if (error) fail("/admin/configuracoes", error.message);
+  if (error) {
+    const missing = /legal_name|cnpj/.test(error.message);
+    fail("/admin/configuracoes", missing ? "Falta criar os campos de razão social e CNPJ no banco: rode supabase/002_dados_legais.sql no SQL Editor do Supabase." : error.message);
+  }
   refresh();
   redirect("/admin/configuracoes?ok=1");
 }

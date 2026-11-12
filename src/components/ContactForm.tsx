@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { saveQuote } from "@/app/(site)/contato/actions";
 import { useWhats } from "./SiteContext";
@@ -73,7 +74,10 @@ export function ContactForm() {
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
         <label className="flex items-start gap-3 text-sm text-muted sm:col-span-2">
           <input type="checkbox" name="consent" required className="mt-1 h-4 w-4 accent-[#B8913F]" />
-          <span>Concordo que a Marcenaria FFMA use estes dados para responder ao meu contato.</span>
+          <span>
+            Concordo que a Marcenaria FFMA use estes dados para responder ao meu contato, conforme a{" "}
+            <Link href="/privacidade" target="_blank" className="underline">Política de Privacidade</Link>.
+          </span>
         </label>
       </div>
       <button type="submit" className="btn btn-brass mt-7 w-full">Enviar pelo WhatsApp</button>

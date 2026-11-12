@@ -94,8 +94,13 @@ create table if not exists company_info (
   phone_label     text,
   contact_email   text,
   address         text,
+  legal_name      text,
+  cnpj            text,
   updated_at      timestamptz default now()
 );
+-- Para bancos criados antes destas colunas (seguro rodar de novo):
+alter table company_info add column if not exists legal_name text;
+alter table company_info add column if not exists cnpj text;
 
 -- ───────── Segurança (RLS) ─────────
 alter table projects       enable row level security;

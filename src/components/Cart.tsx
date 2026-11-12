@@ -183,7 +183,10 @@ export function CartDrawer() {
           <Link href="/carrinho" className="mt-3 block text-center text-sm font-semibold underline" onClick={() => setOpen(false)}>
             Ver carrinho completo
           </Link>
-          <p className="mt-3 text-center text-xs text-muted">Você confirma o pedido e combina pagamento e entrega pelo WhatsApp.</p>
+          <p className="mt-3 text-center text-xs text-muted">
+            Você confirma o pedido e combina pagamento e entrega pelo WhatsApp, conforme os{" "}
+            <Link href="/termos" className="underline" onClick={() => setOpen(false)}>Termos de Compra</Link>.
+          </p>
         </div>
       </aside>
     </>

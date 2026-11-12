@@ -190,6 +190,17 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 
 .ft { background: var(--green-2); color: var(--g-muted); padding: 56px var(--gut) 40px; font-size: 14px; }
 
+/* páginas legais */
+.legal { max-width: 760px; color: var(--muted); font-size: 16.5px; }
+.legal h2 { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.15; color: var(--ink); margin: 48px 0 14px; scroll-margin-top: 110px; }
+.legal h2:first-child { margin-top: 0; }
+.legal p, .legal ul, .legal ol { margin-top: 12px; }
+.legal ul, .legal ol { padding-left: 22px; display: grid; gap: 8px; }
+.legal ul { list-style: disc; }
+.legal ol { list-style: decimal; }
+.legal b { color: var(--ink); font-weight: 600; }
+.legal a { color: var(--brass-dk); text-decoration: underline; text-underline-offset: 3px; }
+
 .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
 .field input, .field select, .field textarea { width: 100%; border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; background: var(--surface); color: var(--ink); outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brass); box-shadow: 0 0 0 3px rgba(184, 145, 63, 0.18); }
@@ -226,6 +237,7 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 }
 @media (max-width: 560px) {
   :root { --gut: 16px; }
+  .ft { padding-bottom: 96px; } /* espaço para o botão do WhatsApp não cobrir os links legais */
   .hero-stats { gap: 18px; justify-content: space-between; }
   .hero-stats strong { font-size: 27px; }
   .hero-cta .btn { flex: 1 1 auto; }

@@ -1,4 +1,5 @@
 import { CartDrawer, CartProvider } from "@/components/Cart";
+import { CookieNotice } from "@/components/CookieNotice";
 import { Footer, WhatsFloat } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollFx, SmoothScroll } from "@/components/Motion";
@@ -16,6 +17,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         <Footer />
         <CartDrawer />
         <WhatsFloat />
+        <CookieNotice />
         <ScrollFx />
       </CartProvider>
     </SiteProvider>

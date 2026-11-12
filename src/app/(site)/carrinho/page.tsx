@@ -29,6 +29,10 @@ export default function Carrinho() {
             </div>
             <CheckoutButton />
             <p className="mt-3 text-center text-xs text-muted">O valor final é confirmado no atendimento, com frete e instalação.</p>
+            <p className="mt-2 text-center text-xs text-muted">
+              Ao finalizar, você concorda com os <Link href="/termos" className="underline">Termos de Compra</Link>. Seus dados seguem a{" "}
+              <Link href="/privacidade" className="underline">Política de Privacidade</Link>.
+            </p>
           </aside>
         </div>
       </section>

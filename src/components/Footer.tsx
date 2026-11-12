@@ -31,7 +31,19 @@ export async function Footer() {
           <span>Seg a sex 8h–18h · Sáb 8h–13h</span>
         </div>
       </div>
-      <p className="mt-12 border-t border-pine pt-6 text-[13px]">© {new Date().getFullYear()} Marcenaria FFMA. Todos os direitos reservados.</p>
+      <div className="mt-12 flex flex-col gap-3 border-t border-pine pt-6 text-[13px] md:flex-row md:items-start md:justify-between">
+        <p>
+          © {new Date().getFullYear()} {c.legalName || "Marcenaria FFMA"}
+          {c.cnpj && <> · CNPJ {c.cnpj}</>}
+          <br />
+          {c.address}
+        </p>
+        <nav className="flex flex-wrap gap-x-5 gap-y-2" aria-label="Informações legais">
+          <Link href="/privacidade" className="hover:text-cream">Política de Privacidade</Link>
+          <Link href="/termos" className="hover:text-cream">Termos de Uso e Compra</Link>
+          <Link href="/termos#arrependimento" className="hover:text-cream">Trocas e devoluções</Link>
+        </nav>
+      </div>
     </footer>
   );
 }

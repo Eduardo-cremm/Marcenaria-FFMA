@@ -22,7 +22,13 @@ export default async function Configuracoes({ searchParams }: { searchParams: { 
           <input name="phone_label" defaultValue={c?.phone_label ?? ""} className={inputCls} />
         </Field>
         <Field label="E-mail de contato"><input name="contact_email" type="email" defaultValue={c?.contact_email ?? ""} className={inputCls} /></Field>
-        <Field label="Endereço"><input name="address" defaultValue={c?.address ?? ""} className={inputCls} /></Field>
+        <Field label="Endereço completo" hint="Rua, número, bairro, cidade, UF e CEP. Aparece no rodapé e nos Termos."><input name="address" defaultValue={c?.address ?? ""} className={inputCls} /></Field>
+        <Field label="Razão social" hint="Obrigatória por lei em sites que vendem (Decreto 7.962/2013).">
+          <input name="legal_name" defaultValue={c?.legal_name ?? ""} className={inputCls} />
+        </Field>
+        <Field label="CNPJ" hint="Só os números ou no formato 00.000.000/0000-00.">
+          <input name="cnpj" inputMode="numeric" defaultValue={c?.cnpj ?? ""} className={inputCls} />
+        </Field>
         <Field label="História da empresa" hint="Texto da página Sobre. Separe os parágrafos com uma linha em branco." className="sm:col-span-2">
           <textarea name="history_text" rows={8} defaultValue={c?.history_text ?? ""} className={inputCls} />
         </Field>
