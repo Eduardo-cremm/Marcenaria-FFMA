@@ -3,7 +3,7 @@ import { CtaFinal, Lines, ProductCard, Steps } from "@/components/Blocks";
 import { HomeMotion } from "@/components/HomeMotion";
 import { Blade } from "@/components/Logo";
 import { Photo } from "@/components/Photo";
-import { RotatingWord } from "@/components/RotatingWord";
+import { HeroTitle } from "@/components/RotatingWord";
 import { getProducts, getProjects, services } from "@/lib/data";
 import { processSteps } from "@/lib/site";
 
@@ -36,11 +36,7 @@ export default async function Home() {
           </div>
           <div className="hero-copy">
             <span className="eyebrow hi">Marcenaria sob medida · São Paulo</span>
-            <h1 className="serif">
-              <span className="ln"><span>Móveis feitos</span></span>
-              <span className="ln"><span>para a <em>sua</em> <RotatingWord words={["casa", "cozinha", "sala", "suíte", "família"]} />,</span></span>
-              <span className="ln"><span>não para a vitrine.</span></span>
-            </h1>
+            <HeroTitle />
             <p className="hi">Projetamos, produzimos e instalamos cozinhas, closets, salas e escritórios. Há mais de 30 anos, uma família cuidando de cada peça.</p>
             <div className="hero-cta hi">
               <Link href="/contato" className="btn btn-brass">Pedir orçamento</Link>

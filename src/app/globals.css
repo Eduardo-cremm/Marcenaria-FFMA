@@ -67,9 +67,11 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 .pt-curtain svg path { fill: var(--cream); }
 
 /* palavra do hero que se troca */
-.rot-box { position: relative; display: inline-block; white-space: nowrap; }
+/* todas as palavras na mesma célula: a largura é a da maior e a linha nunca se reorganiza */
+.rot-box { display: inline-grid; justify-items: start; white-space: nowrap; overflow: hidden; vertical-align: bottom; padding: 0.12em 0 0.1em; margin: -0.12em 0 -0.1em; }
+.rot-box > span { grid-area: 1 / 1; }
 .rot-box > span > span { display: inline-block; }
-.rot-old { position: absolute; left: 0; top: 0; }
+.rot-ghost { visibility: hidden; }
 .rot-in { transform: translateY(110%); animation: rot-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .rot-out { animation: rot-out 0.42s cubic-bezier(0.6, 0, 0.8, 0.4) forwards; }
 @keyframes rot-in { to { transform: translateY(0); } }
