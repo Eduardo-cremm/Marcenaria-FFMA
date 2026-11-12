@@ -9,6 +9,7 @@ import { useEffect } from "react";
 declare global {
   interface Window {
     __fx?: boolean;
+    __lenis?: Lenis;
   }
 }
 
@@ -18,6 +19,7 @@ export function SmoothScroll() {
     gsap.registerPlugin(ScrollTrigger);
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis({ anchors: true });
+    window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     const raf = (t: number) => lenis.raf(t * 1000);
     gsap.ticker.add(raf);
@@ -25,6 +27,7 @@ export function SmoothScroll() {
     return () => {
       gsap.ticker.remove(raf);
       lenis.destroy();
+      window.__lenis = undefined;
     };
   }, []);
   return null;
@@ -45,16 +48,18 @@ export function ScrollFx() {
     gsap.registerPlugin(ScrollTrigger);
     if (!document.documentElement.classList.contains("fx")) return;
 
+    // Vindo pela cortina de transição: espera ela começar a subir para animar o topo da página.
+    const delay = document.documentElement.classList.contains("pt") ? 0.45 : 0;
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".rl").forEach((el) => {
         gsap.set(el, { autoAlpha: 1 });
         gsap.from(el.querySelectorAll(".ln > span"), {
-          yPercent: 115, duration: 1.1, stagger: 0.1, ease: "expo.out",
+          yPercent: 115, duration: 1.1, stagger: 0.1, ease: "expo.out", delay,
           scrollTrigger: { trigger: el, start: "top 90%" },
         });
       });
       gsap.utils.toArray<HTMLElement>("[data-rv]").forEach((el) => {
-        gsap.fromTo(el, { y: 36, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 92%" } });
+        gsap.fromTo(el, { y: 36, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out", delay, scrollTrigger: { trigger: el, start: "top 92%" } });
       });
       gsap.utils.toArray<HTMLElement>("[data-n]").forEach((el) => {
         const o = { v: 0 };

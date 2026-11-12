@@ -53,6 +53,32 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--brass-dk); }
 .pre .intro { display: grid; }
 .intro svg path { fill: var(--cream); }
 
+/* grão de filme por cima de tudo (não recebe clique) */
+.grain { position: fixed; z-index: 250; inset: -50%; width: 200%; height: 200%; pointer-events: none; opacity: 0.075;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.1 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.9s steps(6) infinite; }
+@keyframes grain {
+  0% { transform: translate(0, 0); } 17% { transform: translate(-4%, 3%); } 33% { transform: translate(3%, -5%); }
+  50% { transform: translate(-6%, -2%); } 67% { transform: translate(5%, 4%); } 83% { transform: translate(-2%, 6%); } 100% { transform: translate(0, 0); }
+}
+
+/* cortina entre páginas */
+.pt-curtain { position: fixed; inset: 0; z-index: 180; display: grid; place-items: center; background: var(--green-2); visibility: hidden; border-top: 2px solid var(--brass); border-bottom: 2px solid var(--brass); }
+.pt-curtain svg path { fill: var(--cream); }
+
+/* palavra do hero que se troca */
+.rot-box { position: relative; display: inline-block; white-space: nowrap; }
+.rot-box > span > span { display: inline-block; }
+.rot-old { position: absolute; left: 0; top: 0; }
+.rot-in { transform: translateY(110%); animation: rot-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.rot-out { animation: rot-out 0.42s cubic-bezier(0.6, 0, 0.8, 0.4) forwards; }
+@keyframes rot-in { to { transform: translateY(0); } }
+@keyframes rot-out { to { transform: translateY(-110%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+}
+
 /* header */
 .hd { position: fixed; inset: 0 0 auto 0; z-index: 60; color: var(--cream); transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s; }
 .hd.solid { background: rgba(18, 33, 26, 0.86); backdrop-filter: blur(14px); }
